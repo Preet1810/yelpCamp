@@ -1,16 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const catchAsync = require('../utils/catchAsync');
-const campgrounds = require('../controllers/campgrounds');
-const multer = require('multer');
-const { storage } = require('../cloudinary');
-const upload = multer({
+const express=require('express');
+const router=express.Router();
+const catchAsync=require('../utils/catchAsync');
+const campgrounds=require('../controllers/campgrounds');
+const multer=require('multer');
+const { storage }=require('../cloudinary');
+const upload=multer({
     storage,
-    limits: { fileSize: 500000 }
-    //filesize in bytes, in this case it's 500 kb 
+    limits: { fileSize: 2000000 }
+    //filesize in bytes, in this case it's 2 MB 
 });
-const uploadFile = (req, res, next) => {
-    const uploadProcess = upload.single('picture');
+const uploadFile=(req, res, next) => {
+    const uploadProcess=upload.single('picture');
 
     uploadProcess(req, res, err => {
         if (err instanceof multer.MulterError) {
@@ -27,9 +27,9 @@ const uploadFile = (req, res, next) => {
 
 
 
-const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
+const { isLoggedIn, isAuthor, validateCampground }=require('../middleware');
 
-const Campground = require('../models/campground');
+const Campground=require('../models/campground');
 
 
 router.route('/')
@@ -46,4 +46,4 @@ router.route('/:id')
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm))
 
-module.exports = router;
+module.exports=router;
