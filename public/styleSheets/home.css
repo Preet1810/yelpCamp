@@ -31,8 +31,12 @@ body {
 
 }
 
-.btn-secondary,
-.btn-secondary:hover {
+.btn-secondary {
     color: #333;
     text-shadow: none;
+}
+
+.btn-secondary:hover {
+    background-color: black !important;
+
 }
